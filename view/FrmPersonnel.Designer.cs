@@ -86,7 +86,7 @@
             this.txtPrenom.Location = new System.Drawing.Point(272, 397);
             this.txtPrenom.Multiline = true;
             this.txtPrenom.Name = "txtPrenom";
-            this.txtPrenom.Size = new System.Drawing.Size(321, 40);
+            this.txtPrenom.Size = new System.Drawing.Size(336, 40);
             this.txtPrenom.TabIndex = 11;
             // 
             // txtNom
@@ -95,7 +95,7 @@
             this.txtNom.Location = new System.Drawing.Point(272, 345);
             this.txtNom.Multiline = true;
             this.txtNom.Name = "txtNom";
-            this.txtNom.Size = new System.Drawing.Size(321, 40);
+            this.txtNom.Size = new System.Drawing.Size(336, 40);
             this.txtNom.TabIndex = 12;
             // 
             // txtTel
@@ -104,7 +104,7 @@
             this.txtTel.Location = new System.Drawing.Point(272, 451);
             this.txtTel.Multiline = true;
             this.txtTel.Name = "txtTel";
-            this.txtTel.Size = new System.Drawing.Size(321, 40);
+            this.txtTel.Size = new System.Drawing.Size(336, 40);
             this.txtTel.TabIndex = 13;
             // 
             // txtMail
@@ -113,7 +113,7 @@
             this.txtMail.Location = new System.Drawing.Point(272, 503);
             this.txtMail.Multiline = true;
             this.txtMail.Name = "txtMail";
-            this.txtMail.Size = new System.Drawing.Size(321, 40);
+            this.txtMail.Size = new System.Drawing.Size(336, 40);
             this.txtMail.TabIndex = 14;
             // 
             // label2
