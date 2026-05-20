@@ -1,25 +1,60 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using MediaTek86.controller;
 
 namespace MediaTek86.view
 {
     public partial class FrmConnexion : Form
     {
+        private readonly FrmConnexionController controller;
+
         public FrmConnexion()
         {
             InitializeComponent();
+            controller = new FrmConnexionController();
+        }
+
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+            txtLogin.Focus();
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void txtLogin_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnConnexion_Click(object sender, EventArgs e)
+        {
+
+            string login = txtLogin.Text;
+            string pwd = txtPwd.Text;
+
+            if (controller.ControleAuthentification(login, pwd))
+            {
+                FrmMenu frm = new FrmMenu();
+                frm.Show();
+                Hide();
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Login ou mot de passe incorrect",
+                    "Erreur",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+
+                txtPwd.Clear();
+                txtPwd.Focus();
+            }
+        }
     }
+
 }

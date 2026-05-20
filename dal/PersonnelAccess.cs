@@ -1,6 +1,5 @@
 ﻿using MediaTek86.bddmanager;
 using MediaTek86.model;
-using Org.BouncyCastle.Crypto.Digests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +15,7 @@ namespace MediaTek86.dal
     {
         private readonly BddManager bddManager;
         private readonly string connectionString =
-        "Server=localhost;Database=mediatek86;Uid=admin;Pwd=admin;";
+    "Server=localhost;Database=mediatek86;Uid=root;Pwd=;";
         public PersonnelAccess()
         {
             bddManager = BddManager.GetInstance(connectionString);

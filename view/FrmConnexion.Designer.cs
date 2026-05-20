@@ -33,9 +33,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtLogin = new System.Windows.Forms.TextBox();
-            this.txtMotPasse = new System.Windows.Forms.TextBox();
+            this.txtPwd = new System.Windows.Forms.TextBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.btnLogin = new System.Windows.Forms.Button();
+            this.btnConnexion = new System.Windows.Forms.Button();
             this.btnAnnuler = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -48,9 +48,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(140, 159);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 22);
+            this.label1.Size = new System.Drawing.Size(105, 22);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Login";
+            this.label1.Text = "Connexion";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
@@ -66,21 +66,20 @@
             // txtLogin
             // 
             this.txtLogin.BackColor = System.Drawing.Color.SkyBlue;
-            this.txtLogin.Location = new System.Drawing.Point(308, 141);
-            this.txtLogin.Multiline = true;
+            this.txtLogin.Location = new System.Drawing.Point(308, 161);
             this.txtLogin.Name = "txtLogin";
-            this.txtLogin.Size = new System.Drawing.Size(200, 40);
+            this.txtLogin.Size = new System.Drawing.Size(200, 20);
             this.txtLogin.TabIndex = 2;
+            this.txtLogin.TextChanged += new System.EventHandler(this.txtLogin_TextChanged);
             // 
-            // txtMotPasse
+            // txtPwd
             // 
-            this.txtMotPasse.BackColor = System.Drawing.Color.SkyBlue;
-            this.txtMotPasse.Location = new System.Drawing.Point(308, 215);
-            this.txtMotPasse.Multiline = true;
-            this.txtMotPasse.Name = "txtMotPasse";
-            this.txtMotPasse.Size = new System.Drawing.Size(200, 40);
-            this.txtMotPasse.TabIndex = 3;
-            this.txtMotPasse.UseSystemPasswordChar = true;
+            this.txtPwd.BackColor = System.Drawing.Color.SkyBlue;
+            this.txtPwd.Location = new System.Drawing.Point(308, 235);
+            this.txtPwd.Name = "txtPwd";
+            this.txtPwd.Size = new System.Drawing.Size(200, 20);
+            this.txtPwd.TabIndex = 3;
+            this.txtPwd.UseSystemPasswordChar = true;
             // 
             // imageList1
             // 
@@ -88,17 +87,18 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // btnLogin
+            // btnConnexion
             // 
-            this.btnLogin.BackColor = System.Drawing.Color.DodgerBlue;
-            this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnLogin.Location = new System.Drawing.Point(515, 309);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(118, 34);
-            this.btnLogin.TabIndex = 4;
-            this.btnLogin.Text = "Connexion";
-            this.btnLogin.UseVisualStyleBackColor = false;
+            this.btnConnexion.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnConnexion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConnexion.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnConnexion.Location = new System.Drawing.Point(515, 309);
+            this.btnConnexion.Name = "btnConnexion";
+            this.btnConnexion.Size = new System.Drawing.Size(118, 34);
+            this.btnConnexion.TabIndex = 4;
+            this.btnConnexion.Text = "Connexion";
+            this.btnConnexion.UseVisualStyleBackColor = false;
+            this.btnConnexion.Click += new System.EventHandler(this.btnConnexion_Click);
             // 
             // btnAnnuler
             // 
@@ -143,8 +143,8 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnAnnuler);
-            this.Controls.Add(this.btnLogin);
-            this.Controls.Add(this.txtMotPasse);
+            this.Controls.Add(this.btnConnexion);
+            this.Controls.Add(this.txtPwd);
             this.Controls.Add(this.txtLogin);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -164,9 +164,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtLogin;
-        private System.Windows.Forms.TextBox txtMotPasse;
+        private System.Windows.Forms.TextBox txtPwd;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Button btnConnexion;
         private System.Windows.Forms.Button btnAnnuler;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox1;

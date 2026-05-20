@@ -8,7 +8,7 @@ namespace MediaTek86.dal
         private readonly BddManager bddManager;
 
         private readonly string connectionString =
-            "Server=localhost;Database=mediatek86;Uid=admin;Pwd=admin;";
+    "Server=localhost;Database=mediatek86;Uid=root;Pwd=;";
 
         public ResponsableAccess()
         {
