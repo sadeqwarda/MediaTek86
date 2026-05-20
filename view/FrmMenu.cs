@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MediaTek86.model;
+using MediaTek86.view;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MediaTek86.view;
 
 namespace MediaTek86.view
 {
@@ -17,7 +18,6 @@ namespace MediaTek86.view
         {
             InitializeComponent();
         }
-
         private void label3_Click(object sender, EventArgs e)
         {
 
@@ -34,6 +34,5 @@ namespace MediaTek86.view
             FrmAbsences frm = new FrmAbsences();
             frm.ShowDialog();
         }
-    
     }
 }

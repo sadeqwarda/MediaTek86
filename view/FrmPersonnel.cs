@@ -154,7 +154,7 @@ namespace MediaTek86.view
                 {
                     dgvPersonnel.ClearSelection();
                     dgvPersonnel.Rows[i].Selected = true;
-                    dgvPersonnel.CurrentCell = dgvPersonnel.Rows[i].Cells[0];
+                    dgvPersonnel.CurrentCell = dgvPersonnel.Rows[i].Cells["Nom"];
 
                     personnelSelectionne = personnel;
 

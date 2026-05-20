@@ -39,6 +39,7 @@
             this.btnAnnuler = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnAfficherPwd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -111,6 +112,7 @@
             this.btnAnnuler.TabIndex = 5;
             this.btnAnnuler.Text = "X Annuler";
             this.btnAnnuler.UseVisualStyleBackColor = false;
+            this.btnAnnuler.Click += new System.EventHandler(this.btnAnnuler_Click);
             // 
             // label3
             // 
@@ -134,12 +136,25 @@
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             // 
+            // btnAfficherPwd
+            // 
+            this.btnAfficherPwd.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnAfficherPwd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAfficherPwd.Location = new System.Drawing.Point(526, 233);
+            this.btnAfficherPwd.Name = "btnAfficherPwd";
+            this.btnAfficherPwd.Size = new System.Drawing.Size(39, 28);
+            this.btnAfficherPwd.TabIndex = 12;
+            this.btnAfficherPwd.Text = "👁";
+            this.btnAfficherPwd.UseVisualStyleBackColor = false;
+            this.btnAfficherPwd.Click += new System.EventHandler(this.btnAfficherPwd_Click);
+            // 
             // FrmConnexion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(769, 450);
+            this.Controls.Add(this.btnAfficherPwd);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnAnnuler);
@@ -170,5 +185,6 @@
         private System.Windows.Forms.Button btnAnnuler;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btnAfficherPwd;
     }
 }

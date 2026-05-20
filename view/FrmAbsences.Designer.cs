@@ -41,7 +41,6 @@
             this.cmbMotif = new System.Windows.Forms.ComboBox();
             this.btnAjouter = new System.Windows.Forms.Button();
             this.btnModifier = new System.Windows.Forms.Button();
-            this.btnRetour = new System.Windows.Forms.Button();
             this.btnSupprimer = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAbsences)).BeginInit();
@@ -76,7 +75,8 @@
             this.cmbPersonnel.Location = new System.Drawing.Point(283, 106);
             this.cmbPersonnel.Name = "cmbPersonnel";
             this.cmbPersonnel.Size = new System.Drawing.Size(250, 21);
-            this.cmbPersonnel.TabIndex = 9;
+            this.cmbPersonnel.TabIndex = 13;
+            this.cmbPersonnel.SelectedIndexChanged += new System.EventHandler(this.cmbPersonnel_SelectedIndexChanged);
             // 
             // dgvAbsences
             // 
@@ -86,8 +86,9 @@
             this.dgvAbsences.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAbsences.Location = new System.Drawing.Point(283, 190);
             this.dgvAbsences.Name = "dgvAbsences";
-            this.dgvAbsences.Size = new System.Drawing.Size(606, 195);
-            this.dgvAbsences.TabIndex = 10;
+            this.dgvAbsences.Size = new System.Drawing.Size(371, 195);
+            this.dgvAbsences.TabIndex = 13;
+            this.dgvAbsences.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAbsences_CellClick);
             // 
             // label2
             // 
@@ -130,7 +131,7 @@
             this.dtpDateDebut.Location = new System.Drawing.Point(283, 415);
             this.dtpDateDebut.Name = "dtpDateDebut";
             this.dtpDateDebut.Size = new System.Drawing.Size(250, 20);
-            this.dtpDateDebut.TabIndex = 14;
+            this.dtpDateDebut.TabIndex = 15;
             this.dtpDateDebut.ValueChanged += new System.EventHandler(this.dtpDateDebut_ValueChanged);
             // 
             // dtpDateFin
@@ -167,48 +168,39 @@
             this.btnAjouter.BackColor = System.Drawing.Color.DodgerBlue;
             this.btnAjouter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAjouter.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnAjouter.Location = new System.Drawing.Point(355, 579);
+            this.btnAjouter.Location = new System.Drawing.Point(488, 579);
             this.btnAjouter.Name = "btnAjouter";
             this.btnAjouter.Size = new System.Drawing.Size(118, 51);
             this.btnAjouter.TabIndex = 18;
             this.btnAjouter.Text = "Ajouter";
             this.btnAjouter.UseVisualStyleBackColor = false;
+            this.btnAjouter.Click += new System.EventHandler(this.btnAjouter_Click);
             // 
             // btnModifier
             // 
             this.btnModifier.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.btnModifier.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModifier.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnModifier.Location = new System.Drawing.Point(479, 579);
+            this.btnModifier.Location = new System.Drawing.Point(627, 579);
             this.btnModifier.Name = "btnModifier";
             this.btnModifier.Size = new System.Drawing.Size(118, 51);
             this.btnModifier.TabIndex = 19;
             this.btnModifier.Text = "Modifier";
             this.btnModifier.UseVisualStyleBackColor = false;
-            // 
-            // btnRetour
-            // 
-            this.btnRetour.BackColor = System.Drawing.Color.DarkOrange;
-            this.btnRetour.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRetour.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnRetour.Location = new System.Drawing.Point(727, 579);
-            this.btnRetour.Name = "btnRetour";
-            this.btnRetour.Size = new System.Drawing.Size(118, 51);
-            this.btnRetour.TabIndex = 20;
-            this.btnRetour.Text = "Retour";
-            this.btnRetour.UseVisualStyleBackColor = false;
+            this.btnModifier.Click += new System.EventHandler(this.btnModifier_Click);
             // 
             // btnSupprimer
             // 
             this.btnSupprimer.BackColor = System.Drawing.Color.Red;
             this.btnSupprimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSupprimer.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSupprimer.Location = new System.Drawing.Point(603, 579);
+            this.btnSupprimer.Location = new System.Drawing.Point(761, 579);
             this.btnSupprimer.Name = "btnSupprimer";
             this.btnSupprimer.Size = new System.Drawing.Size(118, 51);
             this.btnSupprimer.TabIndex = 21;
             this.btnSupprimer.Text = "Supprimer";
             this.btnSupprimer.UseVisualStyleBackColor = false;
+            this.btnSupprimer.Click += new System.EventHandler(this.btnSupprimer_Click);
             // 
             // label7
             // 
@@ -229,7 +221,6 @@
             this.ClientSize = new System.Drawing.Size(901, 650);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.btnSupprimer);
-            this.Controls.Add(this.btnRetour);
             this.Controls.Add(this.btnModifier);
             this.Controls.Add(this.btnAjouter);
             this.Controls.Add(this.cmbMotif);
@@ -269,7 +260,6 @@
         private System.Windows.Forms.ComboBox cmbMotif;
         private System.Windows.Forms.Button btnAjouter;
         private System.Windows.Forms.Button btnModifier;
-        private System.Windows.Forms.Button btnRetour;
         private System.Windows.Forms.Button btnSupprimer;
         private System.Windows.Forms.Label label7;
     }

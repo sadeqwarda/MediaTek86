@@ -32,7 +32,6 @@
             this.lblSousTitre = new System.Windows.Forms.Label();
             this.btnPersonnel = new System.Windows.Forms.Button();
             this.btnAbsences = new System.Windows.Forms.Button();
-            this.btnQuitter = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -85,18 +84,6 @@
             this.btnAbsences.UseVisualStyleBackColor = false;
             this.btnAbsences.Click += new System.EventHandler(this.btnAbsences_Click);
             // 
-            // btnQuitter
-            // 
-            this.btnQuitter.BackColor = System.Drawing.Color.DarkOrange;
-            this.btnQuitter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQuitter.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnQuitter.Location = new System.Drawing.Point(655, 361);
-            this.btnQuitter.Name = "btnQuitter";
-            this.btnQuitter.Size = new System.Drawing.Size(118, 50);
-            this.btnQuitter.TabIndex = 11;
-            this.btnQuitter.Text = "QUITTER";
-            this.btnQuitter.UseVisualStyleBackColor = false;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -115,7 +102,6 @@
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnQuitter);
             this.Controls.Add(this.btnAbsences);
             this.Controls.Add(this.btnPersonnel);
             this.Controls.Add(this.lblSousTitre);
@@ -136,7 +122,6 @@
         private System.Windows.Forms.Label lblSousTitre;
         private System.Windows.Forms.Button btnPersonnel;
         private System.Windows.Forms.Button btnAbsences;
-        private System.Windows.Forms.Button btnQuitter;
         private System.Windows.Forms.Label label2;
     }
 }

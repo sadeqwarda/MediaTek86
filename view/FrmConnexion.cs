@@ -55,6 +55,17 @@ namespace MediaTek86.view
                 txtPwd.Focus();
             }
         }
+
+        private void btnAnnuler_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnAfficherPwd_Click(object sender, EventArgs e)
+        {
+            txtPwd.UseSystemPasswordChar = !txtPwd.UseSystemPasswordChar;
+        }
+    
     }
 
 }
