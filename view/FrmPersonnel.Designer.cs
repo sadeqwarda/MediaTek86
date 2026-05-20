@@ -80,7 +80,6 @@
             this.dgvPersonnel.Size = new System.Drawing.Size(662, 219);
             this.dgvPersonnel.TabIndex = 10;
             this.dgvPersonnel.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPersonnel_CellClick);
-            
             // 
             // txtPrenom
             // 
@@ -184,6 +183,7 @@
             this.btnAjouter.TabIndex = 21;
             this.btnAjouter.Text = "Ajouter";
             this.btnAjouter.UseVisualStyleBackColor = false;
+            this.btnAjouter.Click += new System.EventHandler(this.btnAjouter_Click);
             // 
             // btnModifier
             // 
