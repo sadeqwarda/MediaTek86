@@ -73,6 +73,26 @@ namespace MediaTek86.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap rénitialiser {
+            get {
+                object obj = ResourceManager.GetObject("rénitialiser", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap rénitialiser1 {
+            get {
+                object obj = ResourceManager.GetObject("rénitialiser1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap tete_connexion {
             get {
                 object obj = ResourceManager.GetObject("tete connexion", resourceCulture);

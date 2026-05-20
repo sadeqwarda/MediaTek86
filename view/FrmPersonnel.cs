@@ -156,5 +156,57 @@ namespace MediaTek86.view
                 }
             }
         }
+
+        private void btnRechercher_Click(object sender, EventArgs e)
+        {
+            string nomRecherche = txtNom.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(nomRecherche))
+            {
+                MessageBox.Show(
+                    "Saisir un nom.",
+                    "Recherche",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+
+                txtNom.Focus();
+                return;
+            }
+
+            foreach (Personnel personnel in lesPersonnels)
+            {
+                if (personnel.Nom.Equals(nomRecherche, StringComparison.OrdinalIgnoreCase))
+                {
+                    SelectionnerPersonnel(personnel);
+
+                    MessageBox.Show(
+                        "Personnel trouvé.",
+                        "Recherche",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+
+                    return;
+                }
+            }
+
+            MessageBox.Show(
+                "Personnel introuvable.",
+                "Recherche",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning
+            );
+
+            txtNom.Focus();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ViderChamps();
+            dgvPersonnel.ClearSelection();
+            txtNom.Focus();
+        }
     }
+    
 }

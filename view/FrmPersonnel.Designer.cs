@@ -46,6 +46,9 @@
             this.btnRetour = new System.Windows.Forms.Button();
             this.cbxService = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.btnRechercher = new System.Windows.Forms.Button();
+            this.btnVider = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonnel)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,7 +87,7 @@
             // txtPrenom
             // 
             this.txtPrenom.BackColor = System.Drawing.Color.SkyBlue;
-            this.txtPrenom.Location = new System.Drawing.Point(272, 397);
+            this.txtPrenom.Location = new System.Drawing.Point(184, 398);
             this.txtPrenom.Multiline = true;
             this.txtPrenom.Name = "txtPrenom";
             this.txtPrenom.Size = new System.Drawing.Size(336, 40);
@@ -93,7 +96,7 @@
             // txtNom
             // 
             this.txtNom.BackColor = System.Drawing.Color.SkyBlue;
-            this.txtNom.Location = new System.Drawing.Point(272, 345);
+            this.txtNom.Location = new System.Drawing.Point(184, 352);
             this.txtNom.Multiline = true;
             this.txtNom.Name = "txtNom";
             this.txtNom.Size = new System.Drawing.Size(336, 40);
@@ -102,7 +105,7 @@
             // txtTel
             // 
             this.txtTel.BackColor = System.Drawing.Color.SkyBlue;
-            this.txtTel.Location = new System.Drawing.Point(272, 451);
+            this.txtTel.Location = new System.Drawing.Point(184, 451);
             this.txtTel.Multiline = true;
             this.txtTel.Name = "txtTel";
             this.txtTel.Size = new System.Drawing.Size(336, 40);
@@ -111,7 +114,7 @@
             // txtMail
             // 
             this.txtMail.BackColor = System.Drawing.Color.SkyBlue;
-            this.txtMail.Location = new System.Drawing.Point(272, 503);
+            this.txtMail.Location = new System.Drawing.Point(184, 503);
             this.txtMail.Multiline = true;
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(336, 40);
@@ -211,12 +214,12 @@
             // 
             // btnRetour
             // 
-            this.btnRetour.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnRetour.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnRetour.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRetour.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnRetour.Location = new System.Drawing.Point(701, 599);
+            this.btnRetour.Location = new System.Drawing.Point(42, -1);
             this.btnRetour.Name = "btnRetour";
-            this.btnRetour.Size = new System.Drawing.Size(118, 51);
+            this.btnRetour.Size = new System.Drawing.Size(68, 51);
             this.btnRetour.TabIndex = 24;
             this.btnRetour.Text = "Retour";
             this.btnRetour.UseVisualStyleBackColor = false;
@@ -224,9 +227,9 @@
             // cbxService
             // 
             this.cbxService.FormattingEnabled = true;
-            this.cbxService.Location = new System.Drawing.Point(272, 561);
+            this.cbxService.Location = new System.Drawing.Point(184, 566);
             this.cbxService.Name = "cbxService";
-            this.cbxService.Size = new System.Drawing.Size(321, 21);
+            this.cbxService.Size = new System.Drawing.Size(336, 21);
             this.cbxService.TabIndex = 25;
             // 
             // label7
@@ -240,12 +243,50 @@
             this.label7.TabIndex = 26;
             this.label7.Text = "Sélectionnez un personnel pour modifier ses informations";
             // 
+            // btnRechercher
+            // 
+            this.btnRechercher.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnRechercher.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRechercher.Location = new System.Drawing.Point(547, 355);
+            this.btnRechercher.Name = "btnRechercher";
+            this.btnRechercher.Size = new System.Drawing.Size(102, 37);
+            this.btnRechercher.TabIndex = 27;
+            this.btnRechercher.Text = "RECHERCHER";
+            this.btnRechercher.UseVisualStyleBackColor = false;
+            this.btnRechercher.Click += new System.EventHandler(this.btnRechercher_Click);
+            // 
+            // btnVider
+            // 
+            this.btnVider.BackgroundImage = global::MediaTek86.Properties.Resources.rénitialiser1;
+            this.btnVider.FlatAppearance.BorderSize = 0;
+            this.btnVider.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVider.Location = new System.Drawing.Point(736, 342);
+            this.btnVider.Name = "btnVider";
+            this.btnVider.Size = new System.Drawing.Size(40, 40);
+            this.btnVider.TabIndex = 28;
+            this.btnVider.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.LightGray;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(701, 599);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(102, 51);
+            this.button1.TabIndex = 29;
+            this.button1.Text = "RÉNITIALISER";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FrmPersonnel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(847, 679);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnVider);
+            this.Controls.Add(this.btnRechercher);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.cbxService);
             this.Controls.Add(this.btnRetour);
@@ -295,5 +336,8 @@
         private System.Windows.Forms.Button btnRetour;
         private System.Windows.Forms.ComboBox cbxService;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnRechercher;
+        private System.Windows.Forms.Button btnVider;
+        private System.Windows.Forms.Button button1;
     }
 }
