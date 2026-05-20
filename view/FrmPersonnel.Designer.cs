@@ -44,7 +44,7 @@
             this.btnModifier = new System.Windows.Forms.Button();
             this.btnSupprimer = new System.Windows.Forms.Button();
             this.btnRetour = new System.Windows.Forms.Button();
-            this.cmbService = new System.Windows.Forms.ComboBox();
+            this.cbxService = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonnel)).BeginInit();
             this.SuspendLayout();
@@ -75,9 +75,9 @@
             // 
             this.dgvPersonnel.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dgvPersonnel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPersonnel.Location = new System.Drawing.Point(43, 91);
+            this.dgvPersonnel.Location = new System.Drawing.Point(109, 91);
             this.dgvPersonnel.Name = "dgvPersonnel";
-            this.dgvPersonnel.Size = new System.Drawing.Size(761, 219);
+            this.dgvPersonnel.Size = new System.Drawing.Size(662, 219);
             this.dgvPersonnel.TabIndex = 10;
             // 
             // txtPrenom
@@ -219,20 +219,20 @@
             this.btnRetour.Text = "Retour";
             this.btnRetour.UseVisualStyleBackColor = false;
             // 
-            // cmbService
+            // cbxService
             // 
-            this.cmbService.FormattingEnabled = true;
-            this.cmbService.Location = new System.Drawing.Point(272, 561);
-            this.cmbService.Name = "cmbService";
-            this.cmbService.Size = new System.Drawing.Size(321, 21);
-            this.cmbService.TabIndex = 25;
+            this.cbxService.FormattingEnabled = true;
+            this.cbxService.Location = new System.Drawing.Point(272, 561);
+            this.cbxService.Name = "cbxService";
+            this.cbxService.Size = new System.Drawing.Size(321, 21);
+            this.cbxService.TabIndex = 25;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.DimGray;
-            this.label7.Location = new System.Drawing.Point(44, 313);
+            this.label7.Location = new System.Drawing.Point(106, 313);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(378, 15);
             this.label7.TabIndex = 26;
@@ -245,7 +245,7 @@
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(847, 679);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.cmbService);
+            this.Controls.Add(this.cbxService);
             this.Controls.Add(this.btnRetour);
             this.Controls.Add(this.btnSupprimer);
             this.Controls.Add(this.btnModifier);
@@ -291,7 +291,7 @@
         private System.Windows.Forms.Button btnModifier;
         private System.Windows.Forms.Button btnSupprimer;
         private System.Windows.Forms.Button btnRetour;
-        private System.Windows.Forms.ComboBox cmbService;
+        private System.Windows.Forms.ComboBox cbxService;
         private System.Windows.Forms.Label label7;
     }
 }

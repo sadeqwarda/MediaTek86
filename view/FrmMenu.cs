@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MediaTek86.view;
 
 namespace MediaTek86.view
 {
@@ -20,6 +21,12 @@ namespace MediaTek86.view
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnPersonnel_Click(object sender, EventArgs e)
+        {
+            FrmPersonnel frm = new FrmPersonnel();
+            frm.ShowDialog();
         }
     }
 }

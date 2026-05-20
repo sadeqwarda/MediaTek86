@@ -70,6 +70,7 @@
             this.btnPersonnel.TabIndex = 9;
             this.btnPersonnel.Text = "Gestion du personnel";
             this.btnPersonnel.UseVisualStyleBackColor = false;
+            this.btnPersonnel.Click += new System.EventHandler(this.btnPersonnel_Click);
             // 
             // btnAbsences
             // 

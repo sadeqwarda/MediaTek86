@@ -1,20 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using MediaTek86.controller;
+using MediaTek86.model;
 
 namespace MediaTek86.view
 {
     public partial class FrmPersonnel : Form
     {
+        private readonly FrmPersonnelController controller;
+        private List<Personnel> lesPersonnels;
+
         public FrmPersonnel()
         {
             InitializeComponent();
+            controller = new FrmPersonnelController();
+            RemplirListePersonnel();
+        }
+
+        private void RemplirListePersonnel()
+        {
+            lesPersonnels = controller.GetLesPersonnels();
+
+            dgvPersonnel.DataSource = null;
+            dgvPersonnel.DataSource = lesPersonnels;
         }
     }
 }
