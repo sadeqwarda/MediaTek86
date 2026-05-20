@@ -15,7 +15,9 @@ namespace MediaTek86.view
         {
             InitializeComponent();
             controller = new FrmPersonnelController();
+
             RemplirListePersonnel();
+            RemplirListeService();
         }
 
         private void RemplirListePersonnel()
@@ -24,6 +26,13 @@ namespace MediaTek86.view
 
             dgvPersonnel.DataSource = null;
             dgvPersonnel.DataSource = lesPersonnels;
+        }
+        private void RemplirListeService()
+        {
+            cbxService.DataSource = controller.GetLesServices();
+            cbxService.DisplayMember = "Nom";
+            cbxService.ValueMember = "Idservice";
+
         }
     }
 }
