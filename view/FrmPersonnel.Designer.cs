@@ -79,6 +79,8 @@
             this.dgvPersonnel.Name = "dgvPersonnel";
             this.dgvPersonnel.Size = new System.Drawing.Size(662, 219);
             this.dgvPersonnel.TabIndex = 10;
+            this.dgvPersonnel.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPersonnel_CellClick);
+            
             // 
             // txtPrenom
             // 
