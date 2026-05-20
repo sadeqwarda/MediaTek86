@@ -260,5 +260,10 @@ namespace MediaTek86.view
                 cmbMotif.SelectedValue = absenceSelectionnee.Motif.Idmotif;
             }
         }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
