@@ -8,5 +8,11 @@
         public string Tel { get; set; }
         public string Mail { get; set; }
         public Service Service { get; set; }
+
+        public string NomPrenom
+        {
+            get { return Nom + " " + Prenom; }
+        }
     }
+
 }

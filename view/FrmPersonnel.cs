@@ -27,6 +27,18 @@ namespace MediaTek86.view
 
             dgvPersonnel.DataSource = null;
             dgvPersonnel.DataSource = lesPersonnels;
+
+            dgvPersonnel.Columns["Idpersonnel"].Visible = false;
+
+            dgvPersonnel.ReadOnly = true;
+
+            dgvPersonnel.AllowUserToAddRows = false;
+            dgvPersonnel.AllowUserToDeleteRows = false;
+
+            dgvPersonnel.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            dgvPersonnel.MultiSelect = false;
+            dgvPersonnel.Columns["NomPrenom"].Visible = false;
         }
         private void RemplirListeService()
         {
@@ -206,6 +218,93 @@ namespace MediaTek86.view
             ViderChamps();
             dgvPersonnel.ClearSelection();
             txtNom.Focus();
+        }
+
+        private void btnModifier_Click(object sender, EventArgs e)
+        {
+            if (personnelSelectionne == null)
+            {
+                MessageBox.Show(
+                    "Sélectionner un personnel.",
+                    "Modification",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtNom.Text) ||
+                string.IsNullOrWhiteSpace(txtPrenom.Text) ||
+                string.IsNullOrWhiteSpace(txtTel.Text) ||
+                string.IsNullOrWhiteSpace(txtMail.Text) ||
+                cbxService.SelectedItem == null)
+            {
+                MessageBox.Show(
+                    "Tous les champs doivent être remplis.",
+                    "Erreur",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                return;
+            }
+
+            Service service = (Service)cbxService.SelectedItem;
+
+            personnelSelectionne.Nom = txtNom.Text.Trim();
+            personnelSelectionne.Prenom = txtPrenom.Text.Trim();
+            personnelSelectionne.Tel = txtTel.Text.Trim();
+            personnelSelectionne.Mail = txtMail.Text.Trim();
+            personnelSelectionne.Service = service;
+
+            controller.ModifPersonnel(personnelSelectionne);
+
+            RemplirListePersonnel();
+
+            MessageBox.Show(
+                "Personnel modifié.",
+                "Modification",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+        }
+        private void btnSupprimer_Click(object sender, EventArgs e)
+        {
+            if (personnelSelectionne == null)
+            {
+                MessageBox.Show(
+                    "Sélectionner un personnel.",
+                    "Suppression",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                return;
+            }
+
+            DialogResult result = MessageBox.Show(
+                "Voulez-vous supprimer ce personnel ?",
+                "Confirmation",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (result == DialogResult.Yes)
+            {
+                controller.SupprPersonnel(personnelSelectionne);
+
+                RemplirListePersonnel();
+
+                ViderChamps();
+
+                MessageBox.Show(
+                    "Personnel supprimé.",
+                    "Suppression",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+            }
         }
     }
     

@@ -28,5 +28,12 @@ namespace MediaTek86.view
             FrmPersonnel frm = new FrmPersonnel();
             frm.ShowDialog();
         }
+
+        private void btnAbsences_Click(object sender, EventArgs e)
+        {
+            FrmAbsences frm = new FrmAbsences();
+            frm.ShowDialog();
+        }
+    
     }
 }
