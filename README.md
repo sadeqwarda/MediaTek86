@@ -75,6 +75,10 @@ installateur
 
 ![Absences](captures/absences.png)
 
+# Modèle conceptuel de données (MCD)
+
+![MCD](captures/mcd.png)
+
 ## Auteur
 Warda SADEQ
 
