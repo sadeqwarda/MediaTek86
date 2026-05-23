@@ -1,33 +1,29 @@
 # MediaTek86
 
-## PrÈsentation
-Application de gestion du personnel et des absences dÈveloppÈe en C# WinForms avec une architecture MVC et une base de donnÈes MySQL.
+## Pr√©sentation
+Application de gestion du personnel et des absences d√©velopp√©e en C# WinForms avec une architecture MVC et une base de donn√©es MySQL.
 
----
+## Fonctionnalit√©s
 
-## FonctionnalitÈs
-
-### Authentification
-- connexion sÈcurisÈe
+==> Authentification
+- connexion s√©curis√©e
 - affichage / masquage du mot de passe
 
-### Gestion du personnel
+==> Gestion du personnel
 - affichage du personnel
 - recherche d'un personnel
 - ajout d'un nouveau personnel
 - modification d'un personnel existant
 - suppression d'un personnel existant
 
-### Gestion des absences
+==> Gestion des absences
 - affichage des absences
 - ajout d'une absence
 - modification d'une absence
 - suppression d'une absence
-- contrÙle des dates
+- contr√¥le des dates
 
----
-
-## Technologies utilisÈes
+## Technologies utilis√©es
 - C#
 - WinForms
 - MySQL
@@ -35,33 +31,33 @@ Application de gestion du personnel et des absences dÈveloppÈe en C# WinForms av
 - Architecture MVC
 - Git / GitHub
 
----
-
 ## Architecture du projet
 
-- model
-- view
-- controller
-- dal
-- bddmanager
+- model: classes m√©tier
+- view: interfaces graphiques WinForms
+- controller: gestion des traitements
+- dal: acc√®s aux donn√©es MySQL
+- bddmanager: gestion de la connexion base de donn√©es
+- installateur: fichiers d'installation de l'application
 
----
+## Base de donn√©es
 
-## Base de donnÈes
-
-Base utilisÈe : mediatek86
-
----
+Base utilis√©e : mediatek86
 
 ## Lancement du projet
 
 1. Importer la base MySQL
-2. VÈrifier la chaÓne de connexion
-3. Lancer `MediaTek86.exe`
+2. V√©rifier la cha√Æne de connexion
+3. Lancer MediaTek86.exe
 
----
+## Installation
+
+L'installateur se trouve dans le dossier :
+
+installateur
+
 
 ## Auteur
 Warda SADEQ
 
-Projet rÈalisÈ dans le cadre de la formation BTS SIO option SLAM.
+Projet r√©alis√© dans le cadre de la formation BTS SIO option SLAM.
