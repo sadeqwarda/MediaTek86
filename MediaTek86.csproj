@@ -180,6 +180,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="README.md" />
     <None Include="Resources\tete connexion.png" />
   </ItemGroup>
   <ItemGroup>
