@@ -198,6 +198,7 @@
     <Content Include="captures\kanban.png" />
     <Content Include="captures\mcd.png" />
     <Content Include="captures\menu.png" />
+    <Content Include="captures\packages.png" />
     <Content Include="captures\personnel.png" />
     <Content Include="documentation\MediaTek86.xml" />
     <Content Include="MCD.png" />
