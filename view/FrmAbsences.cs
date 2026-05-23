@@ -8,8 +8,8 @@ namespace MediaTek86.view
 {
     /// <summary>
     /// Fenêtre de gestion des absences
-    /// de l'application MediaTeck86
-    /// finaliser le 23/05/2026
+    /// de l'application MediaTek86
+    /// finalisée le 23/05/2026
     /// Warda SADEQ
     /// </summary>
     public partial class FrmAbsences : Form
@@ -44,8 +44,8 @@ namespace MediaTek86.view
             controller = new FrmAbsencesController();
 
             RemplirListePersonnel();
-            RemplirListeAbsences();
             RemplirListeMotifs();
+            RemplirListeAbsences();
         }
 
         /// <summary>
@@ -57,12 +57,39 @@ namespace MediaTek86.view
 
             cmbPersonnel.DataSource = null;
             cmbPersonnel.DataSource = lesPersonnels;
-
-            // Affichage nom + prénom
             cmbPersonnel.DisplayMember = "NomPrenom";
 
-            // cmb vide au démarge de la fenêtre
+            // ComboBox vide au démarrage
             cmbPersonnel.SelectedIndex = -1;
+        }
+
+        /// <summary>
+        /// Vérifie si une absence chevauche une autre absence existante
+        /// </summary>
+        private bool ChevauchementAbsence(DateTime dateDebut, DateTime dateFin)
+        {
+            if (lesAbsences == null)
+            {
+                return false;
+            }
+
+            foreach (Absence absence in lesAbsences)
+            {
+                // Ignore l'absence en cours lors d'une modification
+                if (absenceSelectionnee != null &&
+                    absence.Datedebut == absenceSelectionnee.Datedebut)
+                {
+                    continue;
+                }
+
+                // Chevauchement si les périodes se croisent
+                if (dateDebut <= absence.Datefin && dateFin >= absence.Datedebut)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -75,24 +102,21 @@ namespace MediaTek86.view
             if (personnel == null)
             {
                 dgvAbsences.DataSource = null;
+                lesAbsences = new List<Absence>();
                 return;
             }
 
-            // Récupération des absences
             lesAbsences = controller.GetLesAbsences(personnel);
 
             dgvAbsences.DataSource = null;
             dgvAbsences.DataSource = lesAbsences;
 
-            // Renommage des colonnes
             dgvAbsences.Columns["Datedebut"].HeaderText = "Date début";
             dgvAbsences.Columns["Datefin"].HeaderText = "Date fin";
             dgvAbsences.Columns["Motif"].HeaderText = "Motif";
 
-            // Masquage des colonnes inutiles
             dgvAbsences.Columns["Personnel"].Visible = false;
 
-            // Paramétrage du DataGridView (pas de modification direct sur dgvabsences)
             dgvAbsences.ReadOnly = true;
             dgvAbsences.AllowUserToAddRows = false;
             dgvAbsences.AllowUserToDeleteRows = false;
@@ -106,30 +130,26 @@ namespace MediaTek86.view
         private void RemplirListeMotifs()
         {
             cmbMotif.DataSource = controller.GetLesMotifs();
-
-            // Affichage du libellé
             cmbMotif.DisplayMember = "Libelle";
-
-            // Valeur associée
             cmbMotif.ValueMember = "Idmotif";
         }
 
         /// <summary>
-        ///màj/actualisation des absences lors du changement de personnel
+        /// Actualise les absences lors du changement de personnel
         /// </summary>
         private void cmbPersonnel_SelectedIndexChanged(object sender, EventArgs e)
         {
+            absenceSelectionnee = null;
             RemplirListeAbsences();
         }
 
         /// <summary>
-        /// Sélection/modification absence
+        /// Sélection d'une absence dans le tableau
         /// </summary>
         private void dgvAbsences_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                
                 absenceSelectionnee = lesAbsences[e.RowIndex];
 
                 dtpDateDebut.Value = absenceSelectionnee.Datedebut;
@@ -144,11 +164,48 @@ namespace MediaTek86.view
         /// </summary>
         private void btnAjouter_Click(object sender, EventArgs e)
         {
-            // condition date début<date fin
-            if (dtpDateDebut.Value.Date > dtpDateFin.Value.Date)
+            if (cmbPersonnel.SelectedItem == null)
+            {
+                MessageBox.Show(
+                    "Sélectionner un personnel.",
+                    "Erreur",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                return;
+            }
+
+            DateTime dateDebut = dtpDateDebut.Value.Date;
+            DateTime dateFin = dtpDateFin.Value.Date;
+            foreach (Absence uneAbsence in lesAbsences)
+            {
+                if (uneAbsence.Datedebut.Date == dateDebut)
+                {
+                    MessageBox.Show(
+                        "Une absence existe déjà à cette date de début.",
+                        "Erreur",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                    return;
+                }
+            }
+
+            if (dateDebut > dateFin)
             {
                 MessageBox.Show(
                     "La date de début doit être antérieure ou égale à la date de fin.",
+                    "Erreur",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                return;
+            }
+
+            if (ChevauchementAbsence(dateDebut, dateFin))
+            {
+                MessageBox.Show(
+                    "Cette absence chevauche une absence existante.",
                     "Erreur",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
@@ -162,16 +219,15 @@ namespace MediaTek86.view
             Absence absence = new Absence()
             {
                 Personnel = personnel,
-                Datedebut = dtpDateDebut.Value.Date,
-                Datefin = dtpDateFin.Value.Date,
+                Datedebut = dateDebut,
+                Datefin = dateFin,
                 Motif = motif
             };
 
-            // Ajout dans la base
             controller.AjoutAbsence(absence);
 
-            // màj tab
             RemplirListeAbsences();
+            absenceSelectionnee = null;
 
             MessageBox.Show(
                 "Absence ajoutée.",
@@ -186,11 +242,10 @@ namespace MediaTek86.view
         /// </summary>
         private void btnModifier_Click(object sender, EventArgs e)
         {
-            // Vérification sélection
             if (absenceSelectionnee == null)
             {
                 MessageBox.Show(
-                    "Une absence doit être selectionner.",
+                    "Une absence doit être sélectionnée.",
                     "Modification",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
@@ -198,8 +253,10 @@ namespace MediaTek86.view
                 return;
             }
 
-            // condition date début< date fin
-            if (dtpDateDebut.Value.Date > dtpDateFin.Value.Date)
+            DateTime dateDebut = dtpDateDebut.Value.Date;
+            DateTime dateFin = dtpDateFin.Value.Date;
+
+            if (dateDebut > dateFin)
             {
                 MessageBox.Show(
                     "La date de début doit être antérieure ou égale à la date de fin.",
@@ -210,7 +267,17 @@ namespace MediaTek86.view
                 return;
             }
 
-            // Confirmation avant enregistrement
+            if (ChevauchementAbsence(dateDebut, dateFin))
+            {
+                MessageBox.Show(
+                    "Cette absence chevauche une absence existante.",
+                    "Erreur",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                return;
+            }
+
             DialogResult result = MessageBox.Show(
                 "Voulez-vous modifier cette absence ?",
                 "Confirmation",
@@ -220,19 +287,16 @@ namespace MediaTek86.view
 
             if (result == DialogResult.Yes)
             {
-                // Sauvegarde ancienne date
                 DateTime ancienneDateDebut = absenceSelectionnee.Datedebut;
 
-                // màj des infos
-                absenceSelectionnee.Datedebut = dtpDateDebut.Value.Date;
-                absenceSelectionnee.Datefin = dtpDateFin.Value.Date;
+                absenceSelectionnee.Datedebut = dateDebut;
+                absenceSelectionnee.Datefin = dateFin;
                 absenceSelectionnee.Motif = (Motif)cmbMotif.SelectedItem;
 
-                // Mise à jour base de données
                 controller.ModifAbsence(absenceSelectionnee, ancienneDateDebut);
 
-                
                 RemplirListeAbsences();
+                absenceSelectionnee = null;
 
                 MessageBox.Show(
                     "Absence modifiée.",
@@ -248,11 +312,10 @@ namespace MediaTek86.view
         /// </summary>
         private void btnSupprimer_Click(object sender, EventArgs e)
         {
-            // Vérification sélection
             if (absenceSelectionnee == null)
             {
                 MessageBox.Show(
-                    "Une absence doit être selectionner..",
+                    "Une absence doit être sélectionnée.",
                     "Suppression",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
@@ -260,7 +323,6 @@ namespace MediaTek86.view
                 return;
             }
 
-            // Confirmation utilisateur
             DialogResult result = MessageBox.Show(
                 "Voulez-vous supprimer cette absence ?",
                 "Confirmation",
@@ -270,13 +332,10 @@ namespace MediaTek86.view
 
             if (result == DialogResult.Yes)
             {
-                // Suppression en base
                 controller.SupprAbsence(absenceSelectionnee);
 
-                // Actualisation affichage
                 RemplirListeAbsences();
 
-                // Réinitialisation sélection
                 absenceSelectionnee = null;
 
                 MessageBox.Show(
