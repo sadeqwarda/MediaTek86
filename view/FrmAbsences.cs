@@ -24,7 +24,6 @@ namespace MediaTek86.view
             controller = new FrmAbsencesController();
 
             RemplirListePersonnel();
-            RemplirListePersonnel();
             RemplirListeAbsences();
             RemplirListeMotifs();
         }
@@ -35,6 +34,8 @@ namespace MediaTek86.view
             cmbPersonnel.DataSource = null;
             cmbPersonnel.DataSource = lesPersonnels;
             cmbPersonnel.DisplayMember = "NomPrenom";
+
+            cmbPersonnel.SelectedIndex = -1;
         }
         private void RemplirListeAbsences()
         {
@@ -42,6 +43,7 @@ namespace MediaTek86.view
 
             if (personnel == null)
             {
+                dgvAbsences.DataSource = null;
                 return;
             }
 
