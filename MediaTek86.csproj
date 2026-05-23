@@ -196,10 +196,13 @@
     <Content Include="captures\absences.png" />
     <Content Include="captures\connexion.png" />
     <Content Include="captures\kanban.png" />
+    <Content Include="captures\mcd.png" />
     <Content Include="captures\menu.png" />
     <Content Include="captures\personnel.png" />
     <Content Include="documentation\MediaTek86.xml" />
+    <Content Include="MCD.png" />
     <Content Include="mediatek86.sql" />
+    <Content Include="sql\mediatek86.sql" />
     <None Include="Resources\rénitialiser.png" />
     <None Include="Resources\rénitialiser.jpg" />
   </ItemGroup>
