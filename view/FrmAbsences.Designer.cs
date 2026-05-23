@@ -106,7 +106,6 @@
             this.label2.Size = new System.Drawing.Size(273, 26);
             this.label2.TabIndex = 11;
             this.label2.Text = "Historique des absences";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label4
             // 
@@ -118,7 +117,6 @@
             this.label4.Size = new System.Drawing.Size(142, 26);
             this.label4.TabIndex = 12;
             this.label4.Text = "Date début :";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
@@ -130,7 +128,6 @@
             this.label5.Size = new System.Drawing.Size(123, 26);
             this.label5.TabIndex = 13;
             this.label5.Text = "Date fin   :";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // dtpDateDebut
             // 
@@ -139,7 +136,6 @@
             this.dtpDateDebut.Name = "dtpDateDebut";
             this.dtpDateDebut.Size = new System.Drawing.Size(250, 26);
             this.dtpDateDebut.TabIndex = 15;
-            this.dtpDateDebut.ValueChanged += new System.EventHandler(this.dtpDateDebut_ValueChanged);
             // 
             // dtpDateFin
             // 
@@ -148,7 +144,6 @@
             this.dtpDateFin.Name = "dtpDateFin";
             this.dtpDateFin.Size = new System.Drawing.Size(250, 26);
             this.dtpDateFin.TabIndex = 15;
-            this.dtpDateFin.ValueChanged += new System.EventHandler(this.dtpDateFin_ValueChanged);
             // 
             // label6
             // 
@@ -160,7 +155,7 @@
             this.label6.Size = new System.Drawing.Size(92, 26);
             this.label6.TabIndex = 16;
             this.label6.Text = "Motif   :";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
+            
             // 
             // cmbMotif
             // 
@@ -170,7 +165,7 @@
             this.cmbMotif.Name = "cmbMotif";
             this.cmbMotif.Size = new System.Drawing.Size(250, 28);
             this.cmbMotif.TabIndex = 17;
-            this.cmbMotif.SelectedIndexChanged += new System.EventHandler(this.cmbMotif_SelectedIndexChanged);
+            
             // 
             // btnAjouter
             // 
@@ -232,7 +227,6 @@
             this.label8.Size = new System.Drawing.Size(201, 26);
             this.label8.TabIndex = 23;
             this.label8.Text = "Nouvelle absence";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // FrmAbsences
             // 

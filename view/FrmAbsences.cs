@@ -1,42 +1,73 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MediaTek86.controller;
 using MediaTek86.model;
 
 namespace MediaTek86.view
 {
+    /// <summary>
+    /// Fenêtre de gestion des absences
+    /// de l'application MediaTeck86
+    /// finaliser le 23/05/2026
+    /// Warda SADEQ
+    /// </summary>
     public partial class FrmAbsences : Form
     {
+        /// <summary>
+        /// Contrôleur de gestion des absences
+        /// </summary>
         private readonly FrmAbsencesController controller;
+
+        /// <summary>
+        /// Liste des personnels
+        /// </summary>
         private List<Personnel> lesPersonnels;
+
+        /// <summary>
+        /// Liste des absences
+        /// </summary>
         private List<Absence> lesAbsences;
+
+        /// <summary>
+        /// Absence actuellement sélectionnée
+        /// </summary>
         private Absence absenceSelectionnee;
+
+        /// <summary>
+        /// Constructeur de la fenêtre
+        /// </summary>
         public FrmAbsences()
         {
             InitializeComponent();
+
             controller = new FrmAbsencesController();
 
             RemplirListePersonnel();
             RemplirListeAbsences();
             RemplirListeMotifs();
         }
+
+        /// <summary>
+        /// Charge la liste des personnels dans la ComboBox
+        /// </summary>
         private void RemplirListePersonnel()
         {
             lesPersonnels = controller.GetLesPersonnels();
 
             cmbPersonnel.DataSource = null;
             cmbPersonnel.DataSource = lesPersonnels;
+
+            // Affichage nom + prénom
             cmbPersonnel.DisplayMember = "NomPrenom";
 
+            // cmb vide au démarge de la fenêtre
             cmbPersonnel.SelectedIndex = -1;
         }
+
+        /// <summary>
+        /// Charge les absences du personnel sélectionné
+        /// </summary>
         private void RemplirListeAbsences()
         {
             Personnel personnel = (Personnel)cmbPersonnel.SelectedItem;
@@ -47,86 +78,73 @@ namespace MediaTek86.view
                 return;
             }
 
+            // Récupération des absences
             lesAbsences = controller.GetLesAbsences(personnel);
 
             dgvAbsences.DataSource = null;
             dgvAbsences.DataSource = lesAbsences;
+
+            // Renommage des colonnes
             dgvAbsences.Columns["Datedebut"].HeaderText = "Date début";
             dgvAbsences.Columns["Datefin"].HeaderText = "Date fin";
             dgvAbsences.Columns["Motif"].HeaderText = "Motif";
+
+            // Masquage des colonnes inutiles
             dgvAbsences.Columns["Personnel"].Visible = false;
 
+            // Paramétrage du DataGridView (pas de modification direct sur dgvabsences)
             dgvAbsences.ReadOnly = true;
-
             dgvAbsences.AllowUserToAddRows = false;
             dgvAbsences.AllowUserToDeleteRows = false;
-
             dgvAbsences.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
             dgvAbsences.MultiSelect = false;
         }
+
+        /// <summary>
+        /// Charge les motifs d'absence
+        /// </summary>
         private void RemplirListeMotifs()
         {
             cmbMotif.DataSource = controller.GetLesMotifs();
 
+            // Affichage du libellé
             cmbMotif.DisplayMember = "Libelle";
+
+            // Valeur associée
             cmbMotif.ValueMember = "Idmotif";
         }
-        private void label2_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void cmbMotif_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dtpDateDebut_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dtpDateFin_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        ///màj/actualisation des absences lors du changement de personnel
+        /// </summary>
         private void cmbPersonnel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-                RemplirListeAbsences();
-            
+            RemplirListeAbsences();
         }
 
+        /// <summary>
+        /// Sélection/modification absence
+        /// </summary>
+        private void dgvAbsences_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                
+                absenceSelectionnee = lesAbsences[e.RowIndex];
+
+                dtpDateDebut.Value = absenceSelectionnee.Datedebut;
+                dtpDateFin.Value = absenceSelectionnee.Datefin;
+
+                cmbMotif.SelectedValue = absenceSelectionnee.Motif.Idmotif;
+            }
+        }
+
+        /// <summary>
+        /// Ajout d'une nouvelle absence
+        /// </summary>
         private void btnAjouter_Click(object sender, EventArgs e)
         {
-            if (cmbPersonnel.SelectedItem == null)
-            {
-                MessageBox.Show(
-                    "Sélectionner un personnel.",
-                    "Erreur",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
-                return;
-            }
-
+            // condition date début<date fin
             if (dtpDateDebut.Value.Date > dtpDateFin.Value.Date)
             {
                 MessageBox.Show(
@@ -149,8 +167,10 @@ namespace MediaTek86.view
                 Motif = motif
             };
 
+            // Ajout dans la base
             controller.AjoutAbsence(absence);
 
+            // màj tab
             RemplirListeAbsences();
 
             MessageBox.Show(
@@ -161,12 +181,16 @@ namespace MediaTek86.view
             );
         }
 
+        /// <summary>
+        /// Modification d'une absence
+        /// </summary>
         private void btnModifier_Click(object sender, EventArgs e)
         {
+            // Vérification sélection
             if (absenceSelectionnee == null)
             {
                 MessageBox.Show(
-                    "Sélectionner une absence.",
+                    "Une absence doit être selectionner.",
                     "Modification",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
@@ -174,6 +198,7 @@ namespace MediaTek86.view
                 return;
             }
 
+            // condition date début< date fin
             if (dtpDateDebut.Value.Date > dtpDateFin.Value.Date)
             {
                 MessageBox.Show(
@@ -185,6 +210,7 @@ namespace MediaTek86.view
                 return;
             }
 
+            // Confirmation avant enregistrement
             DialogResult result = MessageBox.Show(
                 "Voulez-vous modifier cette absence ?",
                 "Confirmation",
@@ -194,14 +220,18 @@ namespace MediaTek86.view
 
             if (result == DialogResult.Yes)
             {
+                // Sauvegarde ancienne date
                 DateTime ancienneDateDebut = absenceSelectionnee.Datedebut;
 
+                // màj des infos
                 absenceSelectionnee.Datedebut = dtpDateDebut.Value.Date;
                 absenceSelectionnee.Datefin = dtpDateFin.Value.Date;
                 absenceSelectionnee.Motif = (Motif)cmbMotif.SelectedItem;
 
+                // Mise à jour base de données
                 controller.ModifAbsence(absenceSelectionnee, ancienneDateDebut);
 
+                
                 RemplirListeAbsences();
 
                 MessageBox.Show(
@@ -213,12 +243,16 @@ namespace MediaTek86.view
             }
         }
 
+        /// <summary>
+        /// Suppression d'une absence
+        /// </summary>
         private void btnSupprimer_Click(object sender, EventArgs e)
         {
+            // Vérification sélection
             if (absenceSelectionnee == null)
             {
                 MessageBox.Show(
-                    "Sélectionner une absence.",
+                    "Une absence doit être selectionner..",
                     "Suppression",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
@@ -226,6 +260,7 @@ namespace MediaTek86.view
                 return;
             }
 
+            // Confirmation utilisateur
             DialogResult result = MessageBox.Show(
                 "Voulez-vous supprimer cette absence ?",
                 "Confirmation",
@@ -235,10 +270,13 @@ namespace MediaTek86.view
 
             if (result == DialogResult.Yes)
             {
+                // Suppression en base
                 controller.SupprAbsence(absenceSelectionnee);
 
+                // Actualisation affichage
                 RemplirListeAbsences();
 
+                // Réinitialisation sélection
                 absenceSelectionnee = null;
 
                 MessageBox.Show(
@@ -248,24 +286,6 @@ namespace MediaTek86.view
                     MessageBoxIcon.Information
                 );
             }
-        }
-
-        private void dgvAbsences_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                absenceSelectionnee = lesAbsences[e.RowIndex];
-
-                dtpDateDebut.Value = absenceSelectionnee.Datedebut;
-                dtpDateFin.Value = absenceSelectionnee.Datefin;
-
-                cmbMotif.SelectedValue = absenceSelectionnee.Motif.Idmotif;
-            }
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -6,64 +6,102 @@ using MediaTek86.model;
 
 namespace MediaTek86.view
 {
+    /// <summary>
+    /// Fenêtre de gestion du personnel
+    /// de l'application MediaTeck86
+    /// finaliser le 23/05/2026
+    /// Warda SADEQ
+    /// </summary>
     public partial class FrmPersonnel : Form
     {
+        /// <summary>
+        /// Contrôleur de gestion du personnel
+        /// </summary>
         private readonly FrmPersonnelController controller;
+
+        /// <summary>
+        /// Liste des personnels
+        /// </summary>
         private List<Personnel> lesPersonnels;
+
+        /// <summary>
+        /// Personnel actuellement sélectionné
+        /// </summary>
         private Personnel personnelSelectionne;
 
+        /// <summary>
+        /// Constructeur de la fenêtre
+        /// </summary>
         public FrmPersonnel()
         {
             InitializeComponent();
+
             controller = new FrmPersonnelController();
 
             RemplirListePersonnel();
             RemplirListeService();
         }
 
+        /// <summary>
+        /// remplir la liste du personnel dans le dgv
+        /// </summary>
         private void RemplirListePersonnel()
         {
+            
             lesPersonnels = controller.GetLesPersonnels();
 
             dgvPersonnel.DataSource = null;
             dgvPersonnel.DataSource = lesPersonnels;
 
+            // Masquage des colonnes inutiles (idpersonnel)
             dgvPersonnel.Columns["Idpersonnel"].Visible = false;
+            dgvPersonnel.Columns["NomPrenom"].Visible = false;
 
+            // bloquer la modification direct de dgv
             dgvPersonnel.ReadOnly = true;
-
             dgvPersonnel.AllowUserToAddRows = false;
             dgvPersonnel.AllowUserToDeleteRows = false;
-
             dgvPersonnel.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
             dgvPersonnel.MultiSelect = false;
-            dgvPersonnel.Columns["NomPrenom"].Visible = false;
         }
+
+        /// <summary>
+        /// Charge les services dans la ComboBox
+        /// </summary>
         private void RemplirListeService()
         {
             cbxService.DataSource = controller.GetLesServices();
-            cbxService.DisplayMember = "Nom";
-            cbxService.ValueMember = "Idservice";
 
+            cbxService.DisplayMember = "Nom";
+
+            cbxService.ValueMember = "Idservice";
         }
+
+        /// <summary>
+        /// Sélection d'un personnel dans le tableau
+        /// </summary>
         private void dgvPersonnel_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
+                
                 personnelSelectionne = lesPersonnels[e.RowIndex];
-
+            
                 txtNom.Text = personnelSelectionne.Nom;
                 txtPrenom.Text = personnelSelectionne.Prenom;
                 txtTel.Text = personnelSelectionne.Tel;
                 txtMail.Text = personnelSelectionne.Mail;
+
                 cbxService.SelectedValue = personnelSelectionne.Service.Idservice;
             }
-
         }
 
+        /// <summary>
+        /// Ajoute d' nouveau personnel
+        /// </summary>
         private void btnAjouter_Click(object sender, EventArgs e)
         {
+            // Vérification avant ajout champ obligatoire
             if (string.IsNullOrWhiteSpace(txtNom.Text) ||
                 string.IsNullOrWhiteSpace(txtPrenom.Text) ||
                 string.IsNullOrWhiteSpace(txtTel.Text) ||
@@ -79,6 +117,7 @@ namespace MediaTek86.view
                 return;
             }
 
+            // Vérification doublon (ne pas ajouter un personnel qui existe déja)
             Personnel personnelExistant = RechercherPersonnelSaisi();
 
             if (personnelExistant != null)
@@ -94,8 +133,10 @@ namespace MediaTek86.view
                 return;
             }
 
+            // Récupération du service
             Service service = (Service)cbxService.SelectedItem;
 
+            // Création du personnel
             Personnel personnel = new Personnel()
             {
                 Nom = txtNom.Text.Trim(),
@@ -105,9 +146,12 @@ namespace MediaTek86.view
                 Service = service
             };
 
+            
             controller.AjoutPersonnel(personnel);
 
             RemplirListePersonnel();
+
+            // Réinitialisation des champs (remettre à vide les champs)
             ViderChamps();
 
             MessageBox.Show(
@@ -118,6 +162,9 @@ namespace MediaTek86.view
             );
         }
 
+        /// <summary>
+        /// Vide les champs de saisie
+        /// </summary>
         private void ViderChamps()
         {
             personnelSelectionne = null;
@@ -132,6 +179,10 @@ namespace MediaTek86.view
                 cbxService.SelectedIndex = 0;
             }
         }
+
+        /// <summary>
+        /// Recherche un personnel déjà existant
+        /// </summary>
         private Personnel RechercherPersonnelSaisi()
         {
             foreach (Personnel personnel in lesPersonnels)
@@ -146,6 +197,9 @@ namespace MediaTek86.view
             return null;
         }
 
+        /// <summary>
+        /// boucle pour sélectionner un personnel dans le tableau et afficher ses informations
+        /// </summary>
         private void SelectionnerPersonnel(Personnel personnel)
         {
             for (int i = 0; i < lesPersonnels.Count; i++)
@@ -153,15 +207,19 @@ namespace MediaTek86.view
                 if (lesPersonnels[i].Idpersonnel == personnel.Idpersonnel)
                 {
                     dgvPersonnel.ClearSelection();
+
                     dgvPersonnel.Rows[i].Selected = true;
+
                     dgvPersonnel.CurrentCell = dgvPersonnel.Rows[i].Cells["Nom"];
 
                     personnelSelectionne = personnel;
 
+                    
                     txtNom.Text = personnel.Nom;
                     txtPrenom.Text = personnel.Prenom;
                     txtTel.Text = personnel.Tel;
                     txtMail.Text = personnel.Mail;
+
                     cbxService.SelectedValue = personnel.Service.Idservice;
 
                     return;
@@ -169,10 +227,14 @@ namespace MediaTek86.view
             }
         }
 
+        /// <summary>
+        /// Recherche un personnel par son nom
+        /// </summary>
         private void btnRechercher_Click(object sender, EventArgs e)
         {
             string nomRecherche = txtNom.Text.Trim();
 
+            // Vérification saisie
             if (string.IsNullOrWhiteSpace(nomRecherche))
             {
                 MessageBox.Show(
@@ -186,6 +248,7 @@ namespace MediaTek86.view
                 return;
             }
 
+            // Recherche du personnel
             foreach (Personnel personnel in lesPersonnels)
             {
                 if (personnel.Nom.Equals(nomRecherche, StringComparison.OrdinalIgnoreCase))
@@ -203,8 +266,8 @@ namespace MediaTek86.view
                 }
             }
 
-            MessageBox.Show(
-                "Personnel introuvable.",
+                MessageBox.Show(
+                "Personnel non trouvé.",
                 "Recherche",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning
@@ -213,15 +276,24 @@ namespace MediaTek86.view
             txtNom.Focus();
         }
 
+        /// <summary>
+        /// Réinitialise les champs
+        /// </summary>
         private void button1_Click(object sender, EventArgs e)
         {
             ViderChamps();
+
             dgvPersonnel.ClearSelection();
+
             txtNom.Focus();
         }
 
+        /// <summary>
+        /// Modifie un personnel
+        /// </summary>
         private void btnModifier_Click(object sender, EventArgs e)
         {
+            // condition de vérification des champs
             if (personnelSelectionne == null)
             {
                 MessageBox.Show(
@@ -234,6 +306,7 @@ namespace MediaTek86.view
                 return;
             }
 
+            // Vérification des champs
             if (string.IsNullOrWhiteSpace(txtNom.Text) ||
                 string.IsNullOrWhiteSpace(txtPrenom.Text) ||
                 string.IsNullOrWhiteSpace(txtTel.Text) ||
@@ -250,8 +323,10 @@ namespace MediaTek86.view
                 return;
             }
 
+            // Récupération du service
             Service service = (Service)cbxService.SelectedItem;
 
+            // màj des informations
             personnelSelectionne.Nom = txtNom.Text.Trim();
             personnelSelectionne.Prenom = txtPrenom.Text.Trim();
             personnelSelectionne.Tel = txtTel.Text.Trim();
@@ -260,6 +335,7 @@ namespace MediaTek86.view
 
             controller.ModifPersonnel(personnelSelectionne);
 
+           
             RemplirListePersonnel();
 
             MessageBox.Show(
@@ -269,9 +345,13 @@ namespace MediaTek86.view
                 MessageBoxIcon.Information
             );
         }
+
+        /// <summary>
+        /// Supprimer un personnel
+        /// </summary>
         private void btnSupprimer_Click(object sender, EventArgs e)
         {
-            if (personnelSelectionne == null)
+           if (personnelSelectionne == null)
             {
                 MessageBox.Show(
                     "Sélectionner un personnel.",
@@ -283,6 +363,7 @@ namespace MediaTek86.view
                 return;
             }
 
+            // Confirmation utilisateur
             DialogResult result = MessageBox.Show(
                 "Voulez-vous supprimer ce personnel ?",
                 "Confirmation",
@@ -292,10 +373,13 @@ namespace MediaTek86.view
 
             if (result == DialogResult.Yes)
             {
+                // Suppression en base
                 controller.SupprPersonnel(personnelSelectionne);
 
+               
                 RemplirListePersonnel();
 
+                
                 ViderChamps();
 
                 MessageBox.Show(
@@ -307,5 +391,4 @@ namespace MediaTek86.view
             }
         }
     }
-    
 }

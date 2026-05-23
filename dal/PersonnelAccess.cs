@@ -10,6 +10,9 @@ namespace MediaTek86.dal
 {
     /// <summary>
     /// accès aux données PERSONNEL et services
+    /// de l'application MediaTeck86
+    /// finaliser le 23/05/2026
+    /// Warda SADEQ
     /// </summary>
     public class PersonnelAccess
     {
