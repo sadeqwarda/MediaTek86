@@ -193,6 +193,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="documentation\MediaTek86.xml" />
+    <Content Include="mediatek86.sql" />
     <None Include="Resources\rénitialiser.png" />
     <None Include="Resources\rénitialiser.jpg" />
   </ItemGroup>
