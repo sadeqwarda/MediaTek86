@@ -79,6 +79,9 @@ installateur
 
 ![MCD](captures/mcd.png)
 
+# Diagramme de paquetages
+
+![Diagramme de paquetages](captures/packages.png)
 ## Auteur
 Warda SADEQ
 
