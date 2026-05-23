@@ -62,6 +62,9 @@ installateur
 
 ![Connexion](captures/connexion.png)
 
+==> Menu
+
+![menu](captures/menu.png)
 
 ==> Gestion du personnel
 
