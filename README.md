@@ -82,7 +82,51 @@ installateur
 # Diagramme de paquetages
 
 ![Diagramme de paquetages](captures/packages.png)
-## Auteur
+
+# Historique des commits
+
+==> Initialisation du projet
+- ajout des fichiers du projet
+
+==> Mise en place de l’architecture MVC
+- création de la structure MVC
+- fusion et correction des classes
+- suppression du BddManager en doublon dans le DAL
+
+==> Gestion de l’authentification
+- ajout de la connexion responsable
+- ouverture de la fenêtre menu
+- ajout de l’affichage du mot de passe
+
+==> Gestion du personnel
+- affichage de la liste du personnel
+- affichage des services dans le ComboBox
+- sélection d’un personnel dans le DataGridView
+- recherche d’un personnel
+- réinitialisation des champs
+- contrôle des doublons lors de l’ajout
+
+==> Gestion des absences
+- création de la fenêtre absences
+- affichage des absences du personnel
+- gestion des motifs
+- affichage vide au démarrage de la fenêtre
+
+==> Interface graphique
+- amélioration du design des fenêtres
+- agrandissement des formulaires
+- ajout des captures d’écran
+
+==> Documentation et déploiement
+- création du README
+- ajout du diagramme de paquetage
+- ajout du MCD
+- ajout du script SQL complet
+- création de l’installateur
+- tests et nettoyage du code
+![commits](captures/commits.png)
+
+# Auteur
 Warda SADEQ
 
 Projet réalisé dans le cadre de la formation BTS SIO option SLAM.
