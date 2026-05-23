@@ -56,6 +56,21 @@ L'installateur se trouve dans le dossier :
 
 installateur
 
+# Captures d’écran
+
+==> Connexion
+
+![Connexion](captures/connexion.png)
+
+
+==> Gestion du personnel
+
+![Personnel](captures/personnel.png)
+
+
+==> Gestion des absences
+
+![Absences](captures/absences.png)
 
 ## Auteur
 Warda SADEQ
