@@ -194,6 +194,7 @@
   <ItemGroup>
     <Content Include="absences.png" />
     <Content Include="captures\absences.png" />
+    <Content Include="captures\commits.png" />
     <Content Include="captures\connexion.png" />
     <Content Include="captures\kanban.png" />
     <Content Include="captures\mcd.png" />
