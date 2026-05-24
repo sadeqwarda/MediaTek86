@@ -14,29 +14,11 @@ namespace MediaTek86.view
     /// </summary>
     public partial class FrmAbsences : Form
     {
-        /// <summary>
-        /// Contrôleur de gestion des absences
-        /// </summary>
         private readonly FrmAbsencesController controller;
-
-        /// <summary>
-        /// Liste des personnels
-        /// </summary>
         private List<Personnel> lesPersonnels;
-
-        /// <summary>
-        /// Liste des absences
-        /// </summary>
         private List<Absence> lesAbsences;
-
-        /// <summary>
-        /// Absence actuellement sélectionnée
-        /// </summary>
         private Absence absenceSelectionnee;
 
-        /// <summary>
-        /// Constructeur de la fenêtre
-        /// </summary>
         public FrmAbsences()
         {
             InitializeComponent();
@@ -61,35 +43,6 @@ namespace MediaTek86.view
 
             // ComboBox vide au démarrage
             cmbPersonnel.SelectedIndex = -1;
-        }
-
-        /// <summary>
-        /// Vérifie si une absence chevauche une autre absence existante
-        /// </summary>
-        private bool ChevauchementAbsence(DateTime dateDebut, DateTime dateFin)
-        {
-            if (lesAbsences == null)
-            {
-                return false;
-            }
-
-            foreach (Absence absence in lesAbsences)
-            {
-                // Ignore l'absence en cours lors d'une modification
-                if (absenceSelectionnee != null &&
-                    absence.Datedebut == absenceSelectionnee.Datedebut)
-                {
-                    continue;
-                }
-
-                // Chevauchement si les périodes se croisent
-                if (dateDebut <= absence.Datefin && dateFin >= absence.Datedebut)
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         /// <summary>
@@ -135,6 +88,39 @@ namespace MediaTek86.view
         }
 
         /// <summary>
+        /// Vérifie si une absence chevauche une autre absence
+        /// </summary>
+        private bool ChevauchementAbsence(DateTime dateDebut, DateTime dateFin)
+        {
+            if (lesAbsences == null)
+            {
+                return false;
+            }
+
+            foreach (Absence uneAbsence in lesAbsences)
+            {
+                // Ignore l'absence en cours lors d'une modification
+                if (absenceSelectionnee != null &&
+                    uneAbsence.Datedebut == absenceSelectionnee.Datedebut)
+                {
+                    continue;
+                }
+
+                // Vérification chevauchement
+                bool chevauchement =
+                    dateDebut <= uneAbsence.Datefin.Date &&
+                    dateFin >= uneAbsence.Datedebut.Date;
+
+                if (chevauchement)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Actualise les absences lors du changement de personnel
         /// </summary>
         private void cmbPersonnel_SelectedIndexChanged(object sender, EventArgs e)
@@ -148,7 +134,7 @@ namespace MediaTek86.view
         /// </summary>
         private void dgvAbsences_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0 && lesAbsences != null)
             {
                 absenceSelectionnee = lesAbsences[e.RowIndex];
 
@@ -177,6 +163,7 @@ namespace MediaTek86.view
 
             DateTime dateDebut = dtpDateDebut.Value.Date;
             DateTime dateFin = dtpDateFin.Value.Date;
+
             foreach (Absence uneAbsence in lesAbsences)
             {
                 if (uneAbsence.Datedebut.Date == dateDebut)
@@ -190,7 +177,6 @@ namespace MediaTek86.view
                     return;
                 }
             }
-
             if (dateDebut > dateFin)
             {
                 MessageBox.Show(
@@ -335,7 +321,6 @@ namespace MediaTek86.view
                 controller.SupprAbsence(absenceSelectionnee);
 
                 RemplirListeAbsences();
-
                 absenceSelectionnee = null;
 
                 MessageBox.Show(
