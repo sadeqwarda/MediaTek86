@@ -99,9 +99,10 @@ namespace MediaTek86.view
 
             foreach (Absence uneAbsence in lesAbsences)
             {
-                // Ignore l'absence en cours lors d'une modification
+                // Ignore l'absence en cours lors d'une modification correction chevauchhement
                 if (absenceSelectionnee != null &&
-                    uneAbsence.Datedebut == absenceSelectionnee.Datedebut)
+                     uneAbsence.Datedebut == absenceSelectionnee.Datedebut &&
+                     uneAbsence.Personnel.Idpersonnel == absenceSelectionnee.Personnel.Idpersonnel)
                 {
                     continue;
                 }
