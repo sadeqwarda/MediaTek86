@@ -19,6 +19,9 @@ namespace MediaTek86.view
         private List<Absence> lesAbsences;
         private Absence absenceSelectionnee;
 
+        // Sauvegarde de l'ancienne date début
+        private DateTime ancienneDateDebutSelectionnee;
+
         public FrmAbsences()
         {
             InitializeComponent();
@@ -90,29 +93,15 @@ namespace MediaTek86.view
         /// <summary>
         /// Vérifie si une absence chevauche une autre absence
         /// </summary>
-        private bool ChevauchementAbsence(DateTime dateDebut, DateTime dateFin)
+        /// <summary>
+        /// Vérifie le chevauchement lors d'un ajout
+        /// </summary>
+        private bool ChevauchementAjout(DateTime dateDebut, DateTime dateFin)
         {
-            if (lesAbsences == null)
-            {
-                return false;
-            }
-
             foreach (Absence uneAbsence in lesAbsences)
             {
-                // Ignore l'absence en cours lors d'une modification correction chevauchhement
-                if (absenceSelectionnee != null &&
-                     uneAbsence.Datedebut == absenceSelectionnee.Datedebut &&
-                     uneAbsence.Personnel.Idpersonnel == absenceSelectionnee.Personnel.Idpersonnel)
-                {
-                    continue;
-                }
-
-                // Vérification chevauchement
-                bool chevauchement =
-                    dateDebut <= uneAbsence.Datefin.Date &&
-                    dateFin >= uneAbsence.Datedebut.Date;
-
-                if (chevauchement)
+                if (dateDebut <= uneAbsence.Datefin.Date &&
+                    dateFin >= uneAbsence.Datedebut.Date)
                 {
                     return true;
                 }
@@ -121,6 +110,32 @@ namespace MediaTek86.view
             return false;
         }
 
+        /// <summary>
+        /// Vérifie le chevauchement lors d'une modification
+        /// </summary>
+        /// <summary>
+        /// Vérifie le chevauchement lors d'une modification
+        /// </summary>
+        private bool ChevauchementModification(DateTime dateDebut, DateTime dateFin)
+        {
+            foreach (Absence uneAbsence in lesAbsences)
+            {
+                // Ignore uniquement l'absence sélectionnée
+                if (uneAbsence == absenceSelectionnee)
+                {
+                    continue;
+                }
+
+                // Vérification chevauchement
+                if (dateDebut <= uneAbsence.Datefin.Date &&
+                    dateFin >= uneAbsence.Datedebut.Date)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
         /// <summary>
         /// Actualise les absences lors du changement de personnel
         /// </summary>
@@ -138,6 +153,7 @@ namespace MediaTek86.view
             if (e.RowIndex >= 0 && lesAbsences != null)
             {
                 absenceSelectionnee = lesAbsences[e.RowIndex];
+                ancienneDateDebutSelectionnee = absenceSelectionnee.Datedebut;
 
                 dtpDateDebut.Value = absenceSelectionnee.Datedebut;
                 dtpDateFin.Value = absenceSelectionnee.Datefin;
@@ -189,7 +205,7 @@ namespace MediaTek86.view
                 return;
             }
 
-            if (ChevauchementAbsence(dateDebut, dateFin))
+            if (ChevauchementAjout(dateDebut, dateFin))
             {
                 MessageBox.Show(
                     "Cette absence chevauche une absence existante.",
@@ -254,7 +270,7 @@ namespace MediaTek86.view
                 return;
             }
 
-            if (ChevauchementAbsence(dateDebut, dateFin))
+            if (ChevauchementModification(dateDebut, dateFin))
             {
                 MessageBox.Show(
                     "Cette absence chevauche une absence existante.",
@@ -274,7 +290,7 @@ namespace MediaTek86.view
 
             if (result == DialogResult.Yes)
             {
-                DateTime ancienneDateDebut = absenceSelectionnee.Datedebut;
+                DateTime ancienneDateDebut = ancienneDateDebutSelectionnee;
 
                 absenceSelectionnee.Datedebut = dateDebut;
                 absenceSelectionnee.Datefin = dateFin;
