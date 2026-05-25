@@ -4,26 +4,170 @@
         <name>MediaTek86</name>
     </assembly>
     <members>
-        <member name="F:MediaTek86.Form1.components">
+        <member name="T:MediaTek86.bddmanager.BddManager">
             <summary>
-            Variable nécessaire au concepteur.
+            Classe singleton permettant la connexion à la base MySQL
+            et l'exécution des requêtes SQL.
             </summary>
         </member>
-        <member name="M:MediaTek86.Form1.Dispose(System.Boolean)">
+        <member name="F:MediaTek86.bddmanager.BddManager.instance">
             <summary>
-            Nettoyage des ressources utilisées.
+            Instance unique de la classe.
             </summary>
-            <param name="disposing">true si les ressources managées doivent être supprimées ; sinon, false.</param>
         </member>
-        <member name="M:MediaTek86.Form1.InitializeComponent">
+        <member name="F:MediaTek86.bddmanager.BddManager.connection">
             <summary>
-            Méthode requise pour la prise en charge du concepteur - ne modifiez pas
-            le contenu de cette méthode avec l'éditeur de code.
+            Connexion à la base de données.
+            </summary>
+        </member>
+        <member name="M:MediaTek86.bddmanager.BddManager.#ctor(System.String)">
+            <summary>
+            Constructeur privé permettant d'ouvrir la connexion.
+            </summary>
+            <param name="stringConnect">Chaîne de connexion à la base MySQL.</param>
+        </member>
+        <member name="M:MediaTek86.bddmanager.BddManager.GetInstance(System.String)">
+            <summary>
+            Retourne l'unique instance de BddManager.
+            </summary>
+            <param name="stringConnect">Chaîne de connexion à la base MySQL.</param>
+            <returns>Instance unique de BddManager.</returns>
+        </member>
+        <member name="M:MediaTek86.bddmanager.BddManager.ReqUpdate(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Exécute une requête INSERT, UPDATE ou DELETE.
+            </summary>
+            <param name="stringQuery">Requête SQL à exécuter.</param>
+            <param name="parameters">Paramètres de la requête.</param>
+        </member>
+        <member name="M:MediaTek86.bddmanager.BddManager.ReqSelect(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Exécute une requête SELECT et retourne les lignes obtenues.
+            </summary>
+            <param name="stringQuery">Requête SELECT à exécuter.</param>
+            <param name="parameters">Paramètres de la requête.</param>
+            <returns>Liste des lignes retournées par la requête.</returns>
+        </member>
+        <member name="T:MediaTek86.dal.AbsenceAccess">
+            <summary>
+            Accès aux données des absences et des motifs
+            </summary>
+        </member>
+        <member name="T:MediaTek86.dal.PersonnelAccess">
+            <summary>
+            accès aux données PERSONNEL et services
+            de l'application MediaTeck86
+            finaliser le 23/05/2026
+            Warda SADEQ
+            </summary>
+        </member>
+        <member name="T:MediaTek86.dal.ResponsableAccess">
+            <summary>
+            Classe permettant l'accès aux données du responsable
+            de l'application MediaTeck86
+            finaliser le 23/05/2026
+            Warda SADEQ
+            </summary>
+        </member>
+        <member name="F:MediaTek86.dal.ResponsableAccess.bddManager">
+            <summary>
+            Gestionnaire de connexion à la base de données
+            </summary>
+        </member>
+        <member name="F:MediaTek86.dal.ResponsableAccess.connectionString">
+            <summary>
+            Chaîne de connexion MySQL
+            </summary>
+        </member>
+        <member name="M:MediaTek86.dal.ResponsableAccess.#ctor">
+            <summary>
+            Constructeur de la classe
+            </summary>
+        </member>
+        <member name="M:MediaTek86.dal.ResponsableAccess.ControleAuthentification(System.String,System.String)">
+            <summary>
+            Vérifie l'authentification du responsable
+            </summary>
+            <param name="login">Login saisi</param>
+            <param name="pwd">Mot de passe saisi</param>
+            <returns>True si authentification valide sinon False</returns>
+        </member>
+        <member name="T:MediaTek86.model.Motif">
+            <summary>
+            represente le motif d'absence
+            </summary>
+        </member>
+        <member name="T:MediaTek86.model.Responsable">
+            <summary>
+            le responsable autorisé à se connecté admin
+            </summary>
+        </member>
+        <member name="T:MediaTek86.model.Service">
+            <summary>
+            represente un service de la médiathèque
             </summary>
         </member>
         <member name="M:MediaTek86.Program.Main">
             <summary>
             Point d'entrée principal de l'application.
+            </summary>
+        </member>
+        <member name="T:MediaTek86.view.FrmAbsences">
+            <summary>
+            Fenêtre de gestion des absences
+            de l'application MediaTek86
+            finalisée le 23/05/2026
+            Warda SADEQ
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmAbsences.RemplirListePersonnel">
+            <summary>
+            Charge la liste des personnels dans la ComboBox
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmAbsences.RemplirListeAbsences">
+            <summary>
+            Charge les absences du personnel sélectionné
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmAbsences.RemplirListeMotifs">
+            <summary>
+            Charge les motifs d'absence
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmAbsences.ChevauchementAjout(System.DateTime,System.DateTime)">
+            <summary>
+            Vérifie si une absence chevauche une autre absence
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmAbsences.ChevauchementModification(System.DateTime,System.DateTime)">
+            <summary>
+            Vérifie le chevauchement lors d'une modification
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmAbsences.cmbPersonnel_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            Actualise les absences lors du changement de personnel
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmAbsences.dgvAbsences_CellClick(System.Object,System.Windows.Forms.DataGridViewCellEventArgs)">
+            <summary>
+            Sélection d'une absence dans le tableau
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmAbsences.btnAjouter_Click(System.Object,System.EventArgs)">
+            <summary>
+            Ajout d'une nouvelle absence
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmAbsences.btnModifier_Click(System.Object,System.EventArgs)">
+            <summary>
+            Modification d'une absence
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmAbsences.btnSupprimer_Click(System.Object,System.EventArgs)">
+            <summary>
+            Suppression d'une absence
             </summary>
         </member>
         <member name="F:MediaTek86.view.FrmAbsences.components">
@@ -43,6 +187,44 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="T:MediaTek86.view.FrmConnexion">
+            <summary>
+            Fenêtre de connexionn
+            de l'application MediaTeck86
+            finaliser le 23/05/2026
+            Warda SADEQ
+            </summary>
+        </member>
+        <member name="F:MediaTek86.view.FrmConnexion.controller">
+            <summary>
+            Contrôleur de gestion de la connexion
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmConnexion.#ctor">
+            <summary>
+            Constructeur de la fenêtre
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmConnexion.OnShown(System.EventArgs)">
+            <summary>
+            focus sur le champ login à l'ouverture
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmConnexion.btnConnexion_Click(System.Object,System.EventArgs)">
+            <summary>
+            Vérifie l'authentification utilisateur
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmConnexion.btnAnnuler_Click(System.Object,System.EventArgs)">
+            <summary>
+            Annulation de la connexion
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmConnexion.btnAfficherPwd_Click(System.Object,System.EventArgs)">
+            <summary>
+            Afficher/masquer le mot de passe
+            </summary>
+        </member>
         <member name="F:MediaTek86.view.FrmConnexion.components">
             <summary>
             Required designer variable.
@@ -60,6 +242,29 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="T:MediaTek86.view.FrmMenu">
+            <summary>
+            Fenêtre principale de l'application
+            de l'application MediaTeck86
+            finaliser le 23/05/2026
+            Warda SADEQ
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmMenu.#ctor">
+            <summary>
+            Constructeur de la fenêtre menu
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmMenu.btnPersonnel_Click(System.Object,System.EventArgs)">
+            <summary>
+            Ouvre la fenêtre de gestion du personnel
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmMenu.btnAbsences_Click(System.Object,System.EventArgs)">
+            <summary>
+            Ouvre la fenêtre de gestion des absences
+            </summary>
+        </member>
         <member name="F:MediaTek86.view.FrmMenu.components">
             <summary>
             Required designer variable.
@@ -75,6 +280,89 @@
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:MediaTek86.view.FrmPersonnel">
+            <summary>
+            Fenêtre de gestion du personnel
+            de l'application MediaTeck86
+            finaliser le 23/05/2026
+            Warda SADEQ
+            </summary>
+        </member>
+        <member name="F:MediaTek86.view.FrmPersonnel.controller">
+            <summary>
+            Contrôleur de gestion du personnel
+            </summary>
+        </member>
+        <member name="F:MediaTek86.view.FrmPersonnel.lesPersonnels">
+            <summary>
+            Liste des personnels
+            </summary>
+        </member>
+        <member name="F:MediaTek86.view.FrmPersonnel.personnelSelectionne">
+            <summary>
+            Personnel actuellement sélectionné
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmPersonnel.#ctor">
+            <summary>
+            Constructeur de la fenêtre
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmPersonnel.RemplirListePersonnel">
+            <summary>
+            remplir la liste du personnel dans le dgv
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmPersonnel.RemplirListeService">
+            <summary>
+            Charge les services dans la ComboBox
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmPersonnel.dgvPersonnel_CellClick(System.Object,System.Windows.Forms.DataGridViewCellEventArgs)">
+            <summary>
+            Sélection d'un personnel dans le tableau
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmPersonnel.btnAjouter_Click(System.Object,System.EventArgs)">
+            <summary>
+            Ajoute d' nouveau personnel
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmPersonnel.ViderChamps">
+            <summary>
+            Vide les champs de saisie
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmPersonnel.RechercherPersonnelSaisi">
+            <summary>
+            Recherche un personnel déjà existant
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmPersonnel.SelectionnerPersonnel(MediaTek86.model.Personnel)">
+            <summary>
+            boucle pour sélectionner un personnel dans le tableau et afficher ses informations
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmPersonnel.btnRechercher_Click(System.Object,System.EventArgs)">
+            <summary>
+            Recherche un personnel par son nom
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmPersonnel.button1_Click(System.Object,System.EventArgs)">
+            <summary>
+            Réinitialise les champs
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmPersonnel.btnModifier_Click(System.Object,System.EventArgs)">
+            <summary>
+            Modifie un personnel
+            </summary>
+        </member>
+        <member name="M:MediaTek86.view.FrmPersonnel.btnSupprimer_Click(System.Object,System.EventArgs)">
+            <summary>
+            Supprimer un personnel
             </summary>
         </member>
         <member name="F:MediaTek86.view.FrmPersonnel.components">
@@ -111,6 +399,16 @@
             </summary>
         </member>
         <member name="P:MediaTek86.Properties.Resources.motdepasse">
+            <summary>
+              Recherche une ressource localisée de type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:MediaTek86.Properties.Resources.rénitialiser">
+            <summary>
+              Recherche une ressource localisée de type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:MediaTek86.Properties.Resources.rénitialiser1">
             <summary>
               Recherche une ressource localisée de type System.Drawing.Bitmap.
             </summary>
