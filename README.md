@@ -21,7 +21,7 @@ Application de gestion du personnel et des absences développée en C# WinForms 
 - ajout d'une absence
 - modification d'une absence
 - suppression d'une absence
-- contrôle des dates
+- contrôle des dates ainsi que le chevauchement
 
 ## Technologies utilisées
 - C#
