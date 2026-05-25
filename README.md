@@ -81,7 +81,7 @@ installateur
 
 # Diagramme de paquetages
 
-![Diagramme de paquetages](captures/packages.png)
+![Diagramme de paquetages](captures/package.png)
 
 # Historique des commits
 
