@@ -93,9 +93,6 @@ namespace MediaTek86.view
         /// <summary>
         /// Vérifie si une absence chevauche une autre absence
         /// </summary>
-        /// <summary>
-        /// Vérifie le chevauchement lors d'un ajout
-        /// </summary>
         private bool ChevauchementAjout(DateTime dateDebut, DateTime dateFin)
         {
             foreach (Absence uneAbsence in lesAbsences)
@@ -113,10 +110,7 @@ namespace MediaTek86.view
         /// <summary>
         /// Vérifie le chevauchement lors d'une modification
         /// </summary>
-        /// <summary>
-        /// Vérifie le chevauchement lors d'une modification
-        /// </summary>
-        private bool ChevauchementModification(DateTime dateDebut, DateTime dateFin)
+       private bool ChevauchementModification(DateTime dateDebut, DateTime dateFin)
         {
             foreach (Absence uneAbsence in lesAbsences)
             {
