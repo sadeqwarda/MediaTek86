@@ -83,6 +83,7 @@ installateur
 
 ![Diagramme de paquetages](captures/package.png)
 
+
 # Historique des commits
 
 ==> Initialisation du projet
